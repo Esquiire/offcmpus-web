@@ -5302,6 +5302,7 @@ a.subtle-link {
     border-radius: 5px;
     box-shadow: 0px 3px 20px rgba(59, 67, 83, 0.1);
     margin-bottom: 20px;
+    position: relative;
 
     .image-area_ {
       border-top-left-radius: 5px;
@@ -5381,155 +5382,68 @@ a.subtle-link {
     }
 
     .info-area_ {
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
       width: 60%;
-      overflow-y: scroll;
-      position: relative;
+      max-width: 60%;
+      min-width: 60%;
+      padding: 10px 15px;
 
-      .img-thumbs {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border-top: 1px solid $navyLight;
+      .addr_ {
         display: flex;
-        overflow-x: scroll;
-        padding: 8px 10px;
-
-        .image-thumb {
-          width: 100px;
-          min-width: 100px;
-          height: 60px;
-          border: 1px solid $navyLightText;
-          border-radius: 5px;
-          cursor: pointer;
+        margin-bottom: 5px;
+        .addr1 {
+          font-weight: 600;
           margin-right: 10px;
-
-          &.active {
-            border: 1px solid $navy;
-          }
         }
       }
 
-      .top_ {
-        position: relative;
-        line-height: 18px;
-        box-sizing: border-box;
+      .price-range {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-weight: 600;
+        display: flex;
+        font-size: 1rem;
 
-        .price-range {
-          position: absolute;
-          right: 25px;
-          top: 20px;
-          display: flex;
-
-          .price_ {
-            color: #6ad68b;
-            font-weight: 600;
-            font-family: khumbh-sans;
-            font-size: 1.2rem;
-            margin-right: 2px;
-          }
+        .price_ {
+          color: $green;
+          margin-right: 3px;
         }
+      }
 
-        .addr_ {
-          padding: 20px 20px;
+      .property-tags_ {
+        display: flex;
+        margin-bottom: 5px;
 
-          .__ {
-            display: flex;
-            .addr1 {
-              margin-right: 10px;
-              font-weight: 600;
-              font-family: khumbh-sans;
-              font-size: 1.2rem;
-            }
-
-            .addr2 {
-              transform: translateY(-3px);
-            }
-          }
+        .tag_ {
+          background-color: $navyLight;
+          margin-right: 5px;
+          font-size: 0.8rem;
+          padding: 0px 5px;
+          border-radius: 3px;
         }
+      }
 
-        .owner-info {
-          color: #4f87d0;
-        }
+      .extra-info {
+        display: flex;
+        width: 100%;
 
-        .meta-area {
-          display: flex;
-          margin-top: 15px;
-          border-top: 1px solid $navyLight;
-          border-bottom: 1px solid $navyLight;
+        flex-direction: column;
 
-          .meta-section {
-            flex-grow: 1;
-            text-align: center;
-            border-right: 1px solid $navyLight;
-            padding: 10px 0;
+        margin-top: 15px;
+      }
 
-            &:last-child {
-              border-right: none;
-            }
-          }
-        }
-
-        .property-tags_ {
-          display: flex;
-          flex-wrap: wrap;
-          padding: 0px 20px;
-          margin-top: -8px;
-
-          .tag_ {
-            font-weight: 600;
-            font-family: khumbh-sans;
-            display: inline-block;
-            font-size: 0.7rem;
-            background-color: #edccce;
-            padding: 3px 8px 1px 8px;
-            border-radius: 10px;
-            margin-right: 8px;
-            color: $navy;
-            cursor: pointer;
-            transition: background-color 0.25s;
-
-            &:hover {
-              background-color: #ebb7ba;
-            }
-          }
-        }
-
-        .description {
-          box-sizing: border-box;
-          padding: 15px;
-
+      .property-ratings {
+        display: flex;
+        margin-top: 20px;
+        
+        .ratings_ {
+          width: 50%;
           .header {
-            font-family: khumbh-sans;
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            margin-bottom: 8px;
-          }
-        }
-
-        .property-ratings {
-          display: flex;
-          margin-top: 8px;
-          padding: 10px 30px;
-
-          .ratings_ {
-            // border: 1px solid black;
-            width: 50%;
-            height: 60px;
-
-            .header {
-              font-family: khumbh-sans;
-              font-weight: 600;
-              text-transform: uppercase;
-              font-size: 0.75rem;
-              margin-bottom: 8px;
-            }
           }
         }
       }
+
     }
   }
 }
@@ -5644,14 +5558,80 @@ a.subtle-link {
 }
 
 .property-interest-area {
-  display: flex;
-  background-color: white;
-  justify-content: space-between;
   width: 90%;
   margin: 0 auto;
-  padding: 12px 15px;
-  align-items: center;
-  border-radius: 5px;
+
+  .main-section {
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    padding: 12px 15px;
+    align-items: center;
+    border-radius: 5px;
+  }
+
+  .potential-property-interest-header {
+    display: flex;
+    background-color: white;
+    padding: 5px 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+
+    .room-number {
+      width: 20%;
+    }
+    .price-per-month {
+      width: 20%;
+    }
+
+    .date-start {
+      width: 20%;
+    }
+
+    .date-end {
+      width: 20%;
+    }
+
+    .request-lease-button-area{
+      width: 20%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .potential-property-interest {
+    background-color: white;
+    padding: 12px 15px;
+    display: flex;
+    // font-weight: 600;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+    .room-number {
+      width: 20%;
+    }
+    .price-per-month {
+      width: 20%;
+    }
+
+    .date-start {
+      width: 20%;
+    }
+
+    .date-end {
+      width: 20%;
+    }
+
+    .request-lease-button-area{
+      width: 20%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &.last-child {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
 }
 
 .lease-popup-info {
