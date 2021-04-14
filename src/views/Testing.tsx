@@ -18,6 +18,9 @@ const {
 const Testing = () => {
 
   const [stepFormState, stepFormView] = SteppedForm({
+    onComplete: () => {
+      console.log(`Stepped form completed!`);
+    },
     stepsInfo: [{
       label: "Select Input",
       header: "Select Input",
@@ -67,16 +70,37 @@ type FormStepInfo = {
   component: StepFormComponent // { state: any, view: () => JSX.Element }
 }
 
-const SteppedForm = ({ stepsInfo }: { stepsInfo: FormStepInfo[] }) => {
+const SteppedForm = ({ stepsInfo, onComplete }: { stepsInfo: FormStepInfo[], onComplete: () => void }) => {
 
   useEffect(() => {
     console.log("Step Info Updated", stepsInfo);
   }, [stepsInfo]);
 
+  const [stepsCompleted, setStepsCompleted] = useState<Set<number>>(new Set());
   const [stepState, setStepState] = useState<number>(0);
 
-  const goToStep = (step_index: number) => {
-    setStepState(Math.min(Math.max(0, step_index), stepsInfo.length - 1));
+  const goToStep = async (step_index: number) => {
+    // process the beforeContinue of the current component
+
+    let current_index = stepState;
+    let continueIfPromise: Promise<boolean> = new Promise((resolve, reject) =>
+      resolve(stepsInfo[current_index].beforeContinue(stepsInfo[current_index].component.getState()))
+    );
+
+    let success: boolean = await continueIfPromise;
+    if (success) {
+      stepsCompleted.add(current_index);
+      setStepsCompleted(stepsCompleted);
+
+      let next_index = Math.min(Math.max(0, step_index), stepsInfo.length - 1);
+      if (current_index == next_index)
+        // the end of the stepped form has been reached
+        onComplete();
+      else setStepState(next_index);
+    }
+    else {
+      console.error(`Error: continueIf failed for index ${current_index}`);
+    }
   }
 
   const renderView = () => {
@@ -105,7 +129,7 @@ const SteppedForm = ({ stepsInfo }: { stepsInfo: FormStepInfo[] }) => {
                   <div className="step-link-index">{i + 1}</div>
                   <div className="step-link-label">{stepsInfo[i].label}</div>
                   <div className="step-link-status">
-                    {i % 2 == 0 ?
+                    {stepsCompleted.has(i) ?
                       <span style={{ color: "#6AD68B" }}><HiCheck /></span> :
                       <span></span>
                     }
