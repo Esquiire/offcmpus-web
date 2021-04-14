@@ -6455,6 +6455,10 @@ a.subtle-link {
             }
             .step-link-label {
               padding: 5px 10px 5px 0;
+              flex-grow: 1;
+            }
+            .step-link-status {
+              padding: 5px 10px 5px 0;
             }
           }
         }

@@ -6,6 +6,8 @@ import NumberPicker from '../components/toolbox/form/NumberPicker'
 import Button from '../components/toolbox/form/Button'
 import Centered from '../components/toolbox/layout/Centered'
 
+import { HiCheck } from 'react-icons/hi';
+
 const {
   numbersOnly: numbersOnlyValidator,
   minLen: minLenValidator
@@ -120,6 +122,12 @@ const SteppedForm = ({ stepsInfo }: { stepsInfo: FormStepInfo[] }) => {
                 stepLinks.push(<div className={`step-link-el ${i == stepState ? 'active' : ''}`}>
                   <div className="step-link-index">{i + 1}</div>
                   <div className="step-link-label">{stepsInfo[i].label}</div>
+                  <div className="step-link-status">
+                    {i % 2 == 0 ?
+                      <span style={{ color: "#6AD68B" }}><HiCheck /></span> :
+                      <span></span>
+                    }
+                  </div>
                 </div>);
               }
               return stepLinks;
