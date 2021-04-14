@@ -6384,3 +6384,99 @@ a.subtle-link {
   font-family: monospace;
   border-radius: 3px;
 }
+
+.stepped-form-container {
+
+  .stepped-form-holder {
+    background-color: white;
+    box-sizing: border-box;
+    margin-top: 60px;
+    position: relative;
+    border-radius: 5px;
+
+    .header-area {
+      position: absolute;
+      transform: translateY(calc(-100% - 15px)) translateX(5px);
+
+      .header {
+        font-weight: 600;
+        font-size: 1.2rem;
+        transform: translateY(4px);
+      }
+
+      .sub-header {
+        font-size: 1rem;
+      }
+    }
+
+    .stepped-form-contents {
+      display: flex;
+      height: 350px;
+
+      .stepped-form-step-list {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+        background-color: $navyLight;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        overflow: hidden;
+        position: relative;
+
+        .stepped-form-list-scroll-container {
+          position: absolute;
+          top: 40px; bottom: 0;
+          left: 0; right: 0;
+          border-top: 1px solid rgba(59, 67, 83, 0.1);
+          overflow-y: scroll;
+
+
+          .step-link-el {
+            display: flex;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            transition: background 0.25s;
+
+            &.active {
+              background-color: rgba(0, 0, 0, 0.04);
+              font-weight: 600;
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.04);
+              }
+            }
+  
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.025);
+            }
+  
+            .step-link-index {
+              padding: 5px 10px 5px 10px;
+              font-weight: 600;
+            }
+            .step-link-label {
+              padding: 5px 10px 5px 0;
+            }
+          }
+        }
+
+      }
+
+      .stepped-form-interaction-area {
+        padding: 10px 15px;
+        position: relative;
+        flex-grow: 1;
+
+        .step-control-area {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-top: 1px solid rgba(59, 67, 83, 0.1);
+          padding: 10px 15px;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}

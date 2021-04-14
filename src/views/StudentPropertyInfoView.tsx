@@ -103,7 +103,6 @@ const StudentPropertyInfoView = ({ property_id }: { property_id: string }) => {
     const [userLease, setUserLease] = useState<any>(null);
     const [userLeaseHistory, setUserLeaseHistory] = useState<LeaseHistory | null>(null);
     const [reviewPopupPage, setReviewPopupPage] = useState<number>(0);
-    const [leaseInfoPopup, setLeaseInfoPopup] = useState<boolean>(false);
     const [showImageGallery, setShowImageGallery] = useState<boolean>(false);
 
     const [imageIndex, setImageIndex] = useState<number>(0);
@@ -605,94 +604,6 @@ const StudentPropertyInfoView = ({ property_id }: { property_id: string }) => {
                 }}
                 confirmButtonText={reviewPopupPage == 0 ? `Next: Landlord Review` : `Save Review`}
             />}
-
-        </Popup>
-
-        <Popup
-            width={600}
-            height={700}
-            show={summary != null && summary.leases.length > 0 && leaseInfoPopup}
-        >
-            <PopupHeader
-                withClose={true}
-                onClose={() => setLeaseInfoPopup(false)}
-            >
-                {summary ? summary.leases.length : 0} Room(s) Available
-            </PopupHeader>
-
-            <div style={{
-                padding: "10px 20px"
-            }}>
-                {/* List the leases that a student can rent out */}
-                {summary && summary.leases
-                    && summary.leases.map((lease_av: LeaseAndAvailability, i: number) => {
-                        let lease: Lease = lease_av.lease;
-                        return (<div key={i} className="lease-popup-info">
-                            <div style={{ width: "60%" }}>
-                                <div style={{ fontWeight: 600 }}>Room {i + 1}</div>
-                                <div className="kvp_">
-                                    <div className="key_">Price</div>
-                                    <div className="value_">${lease.price_per_month}/month</div>
-                                </div>
-                                <div className="kvp_">
-                                    <div className="key_">Available From</div>
-                                    <div className="value_">{dateAbbr(new Date(lease.lease_availability_start_date ? lease.lease_availability_start_date : ''))}</div>
-                                </div>
-                                <div className="kvp_">
-                                    <div className="key_">Lease Ends</div>
-                                    <div className="value_">{dateAbbr(new Date(lease.lease_availability_end_date ? lease.lease_availability_end_date : ''))}</div>
-                                </div>
-                            </div>
-                            {alreadyInterested(lease) &&
-                                <div style={{
-                                    display: `flex`,
-                                    alignItems: `center`
-                                }}>
-                                    <div>
-                                        <Tag icon={<CheckCircleOutlined />} color="success">
-                                            Already interested
-                                    </Tag>
-                                    </div>
-                                    <div>
-                                        <MoreDetails
-                                            width={200}
-                                            details={summary == null ? `` :
-                                                `The landlord, ${summary.landlord.first_name} ${summary.landlord.last_name}, has recieved
-                                            notificaton of your interest. You will be notificed if they choose to give you the lease.`}
-                                        />
-                                    </div>
-                                </div>}
-                            {!alreadyInterested(lease) &&
-                                <div style={{ width: `160px` }}>
-                                    {lease_av.able_to_lease && <Button
-                                        text="I'm Interested"
-                                        textColor="white"
-                                        bold={true}
-                                        transformDisabled={true}
-                                        background="#E0777D"
-                                        onClick={() => {
-
-                                            ExpressInterest({
-                                                variables: {
-                                                    student_id: user && user.user ? user.user._id : "",
-                                                    lease_id: lease._id
-                                                }
-                                            })
-
-                                        }}
-                                    />}
-                                    {!lease_av.able_to_lease && <Button
-                                        text="Unable to Lease"
-                                        textColor="white"
-                                        bold={true}
-                                        disabled={true}
-                                        transformDisabled={true}
-                                    />}
-                                </div>}
-                        </div>);
-                    }
-                    )}
-            </div>
 
         </Popup>
 
