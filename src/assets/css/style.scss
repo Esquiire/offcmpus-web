@@ -6466,9 +6466,16 @@ a.subtle-link {
       }
 
       .stepped-form-interaction-area {
-        padding: 10px 15px;
         position: relative;
         flex-grow: 1;
+
+        .stepped-content-area {
+          position: absolute;
+          left: 0; right: 0;
+          top: 0; bottom: 50px;
+          padding: 10px 15px;
+          overflow-y: scroll;
+        }
 
         .step-control-area {
           position: absolute;
@@ -6481,6 +6488,46 @@ a.subtle-link {
           justify-content: space-between;
         }
       }
+    }
+  }
+}
+
+.step-input-field {
+  border: 1px solid $navyLightText;
+  border-radius: 3px;
+  outline: none;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  color: $navy;
+  width: 50%;
+}
+
+.step-select-input {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 10px;
+  row-gap: 10px;
+
+  ._selectable-el {
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid $navyLight;
+    background-color: #F6F7F9;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.25s;
+
+    &.active {
+      background-color: #e5e9f0;
+      border: 1px solid rgb(205, 216, 235);
+      &:hover {
+        background-color: #e5e9f0;
+      }
+    }
+
+    &:hover {
+      background-color: #edeff3;
     }
   }
 }
